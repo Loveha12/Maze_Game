@@ -16,8 +16,8 @@ public class GridAreaIcon
 
     public GridAreaIcon(double x, double y, double rotation, double scale, Image image, String caption)
     {
-        this.x = (x + 1); // adjusted for 0 values in input file
-        this.y = (y + 1); // adjusted for 0 values in input file
+        this.x = (x); // adjusted for 0 values in input file
+        this.y = (y); // adjusted for 0 values in input file
         this.rotation = rotation;
         this.scale = scale;
         this.image = image;

@@ -4,124 +4,102 @@ goal (15,15)
 item "Rusty Key" {
     at (1,3)
     message "It's old, but it still turns. Somewhere there must be a lock."
+    icon "rusty-key.png"
 }
 item "Pickaxe" {
     at (1,15)
     message "Heavy work ahead. Time to clear some rubble."
+    icon "pickaxe.png"
 }
-item "Rope" {
+item "Whip" {
     at (9,13)
     message "Long and sturdy. Good for crossing a gap."
-}
-item "Moon Sigil" {
-    at (7,1)
-    message "It hums softly. A sealed gate should recognise this."
+    icon "whip.png"
 }
 item "Lantern" {
     at (15,5)
     message "A faint glow. Nothing here seems to need it."
+    icon "lantern.png"
 }
-obstacle {
+obstacle "Door" {
     at (2,13)
     requires "Rusty Key"
 }
-obstacle {
+obstacle "Door" {
     at (11,12)
     requires "Pickaxe"
 }
-obstacle {
+obstacle "Door" {
     at (15,2)
-    requires "Rope"
+    requires "Whip"
 }
-obstacle {
+obstacle "Door" {
     at (15,10)
-    requires "Moon Sigil"
+    requires "Lantern"
 }
-obstacle {
+obstacle "" {
     at (6,1), (8,1)
-    requires "Bedrock"
 }
-obstacle {
+obstacle "" {
     at (1,2), (2,2), (3,2), (4,2), (6,2), (8,2)
-    requires "Bedrock"
 }
-obstacle {
+obstacle "" {
     at (10,2), (12,2), (13,2), (14,2)
-    requires "Bedrock"
 }
-obstacle {
+obstacle "" {
     at (4,3), (6,3), (8,3), (10,3), (12,3)
-    requires "Bedrock"
 }
-obstacle {
+obstacle "" {
     at (1,4), (2,4), (4,4), (6,4), (8,4), (10,4)
-    requires "Bedrock"
 }
-obstacle {
+obstacle "" {
     at (12,4), (14,4), (15,4)
-    requires "Bedrock"
 }
-obstacle {
+obstacle "" {
     at (4,5), (6,5), (8,5), (10,5), (12,5), (14,5)
-    requires "Bedrock"
 }
-obstacle {
+obstacle "" {
     at (2,6), (3,6), (4,6), (6,6), (8,6), (10,6)
-    requires "Bedrock"
 }
-obstacle {
+obstacle "" {
     at (12,6), (14,6)
-    requires "Bedrock"
 }
-obstacle {
+obstacle "" {
     at (6,7), (8,7), (10,7), (12,7), (14,7)
-    requires "Bedrock"
 }
-obstacle {
+obstacle "" {
     at (2,8), (3,8), (4,8), (5,8), (6,8), (8,8)
-    requires "Bedrock"
 }
-obstacle {
+obstacle "" {
     at (10,8), (12,8), (14,8)
-    requires "Bedrock"
 }
-obstacle {
+obstacle "" {
     at (2,9), (8,9), (10,9), (12,9)
-    requires "Bedrock"
 }
-obstacle {
+obstacle "" {
     at (2,10), (4,10), (5,10), (6,10), (8,10), (10,10)
-    requires "Bedrock"
 }
-obstacle {
+obstacle "" {
     at (12,10), (13,10), (14,10)
-    requires "Bedrock"
 }
-obstacle {
+obstacle "" {
     at (2,11), (6,11), (10,11), (12,11)
-    requires "Bedrock"
 }
-obstacle {
+obstacle "" {
     at (2,12), (3,12), (4,12), (6,12), (7,12), (8,12)
-    requires "Bedrock"
 }
-obstacle {
+obstacle "" {
     at (9,12), (10,12), (12,12), (14,12), (15,12)
-    requires "Bedrock"
 }
-obstacle {
+obstacle "" {
     at (4,13), (10,13), (12,13)
-    requires "Bedrock"
 }
-obstacle {
+obstacle "" {
     at (1,14), (2,14), (4,14), (5,14), (6,14), (7,14)
-    requires "Bedrock"
 }
-obstacle {
+obstacle "" {
     at (8,14), (9,14), (10,14), (12,14), (13,14), (14,14)
-    requires "Bedrock"
 }
-obstacle {
+obstacle "" {
     at (12,15)
-    requires "Bedrock"
 }

@@ -132,6 +132,7 @@ public class ConfigReader {
         
         List<int[]> locations = new ArrayList<>();
         String message = "";
+        String icon = "";
         
         String line;
         while ((line = reader.readLine()) != null) {
@@ -149,11 +150,16 @@ public class ConfigReader {
                 if (!messages.isEmpty()) {
                     message = messages.get(0);
                 }
+            } else if (lowerLine.startsWith("icon")) {
+                List<String> icons = readQuotedStrings(line);
+                if (!icons.isEmpty()) {
+                    icon = icons.get(0);
+                }
             }
         }
         
         for (int[] coords : locations) {
-            InputStream itemImageStream = GameData.class.getClassLoader().getResourceAsStream("item.png");
+            InputStream itemImageStream = GameData.class.getClassLoader().getResourceAsStream(icon);
             Item item = new Item(itemName, new GridAreaIcon(coords[0], coords[1], 0.0, 1.0, itemImageStream, itemName), message);
             items.add(item); 
         }
@@ -163,7 +169,12 @@ public class ConfigReader {
      * Reads a multi-line Obstacle configuration block.
      */
     private void readObstacleBlock(BufferedReader reader, String headerLine) throws IOException {
-        
+        List<String> obstacleNames = readQuotedStrings(headerLine);
+        if (obstacleNames.isEmpty()) {
+            throw new IOException("Obstacle block missing name: " + headerLine);
+        }
+        String obstacleName = obstacleNames.get(0);
+
         List<int[]> locations = new ArrayList<>();
         List<String> requiredItems = new ArrayList<>();
         
@@ -184,8 +195,13 @@ public class ConfigReader {
         }
         // Create an Obstacle object for every location specified
         for (int[] coords : locations) {
-            InputStream obstacleImageStream = GameData.class.getClassLoader().getResourceAsStream("obstacle.png");
-            Obstacle obstacle = new Obstacle(new GridAreaIcon(coords[0], coords[1], 0.0, 1.0, obstacleImageStream, "Obstacle"), requiredItems);
+            InputStream obstacleImageStream;
+            if (obstacleName.equals("Door")) {
+                obstacleImageStream = GameData.class.getClassLoader().getResourceAsStream("door.png");
+            } else {
+                obstacleImageStream = GameData.class.getClassLoader().getResourceAsStream("obstacle.png");
+            }
+            Obstacle obstacle = new Obstacle(new GridAreaIcon(coords[0], coords[1], 0.0, 1.0, obstacleImageStream, ""), requiredItems);
             obstacles.add(obstacle); 
         }
     }
