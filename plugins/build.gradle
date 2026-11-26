@@ -1,0 +1,21 @@
+plugins {
+    id 'java-library'
+    id "org.openjfx.javafxplugin" version "0.1.0"
+
+}
+
+'group = edu.curtin.saed'
+'version = 1.0'
+
+repositories {
+    mavenCentral()
+}
+
+javafx {
+    version = "19.0.2.1"  // Last JavaFX version compatible with Java 11
+    modules = [ "javafx.controls" ]
+}
+
+dependencies {
+    implementation project(':api')
+}
