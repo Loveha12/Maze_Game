@@ -198,6 +198,8 @@ public class ConfigReader {
             InputStream obstacleImageStream;
             if (obstacleName.equals("Door")) {
                 obstacleImageStream = GameData.class.getClassLoader().getResourceAsStream("door.png");
+            } else if (obstacleName.equals("Monster")) {
+                obstacleImageStream = GameData.class.getClassLoader().getResourceAsStream("shambling-mound.png");
             } else {
                 obstacleImageStream = GameData.class.getClassLoader().getResourceAsStream("obstacle.png");
             }
@@ -267,7 +269,8 @@ public class ConfigReader {
             0.0, // rotation (degrees)
             1.0, // scale
             GameData.class.getClassLoader().getResourceAsStream("player.png"),  // Image (InputStream)
-            "Player"));
+            "Player"),
+            1);
         GameData data = new GameData(player, 
             (new GridAreaIcon(
             goalX,   // x
@@ -288,7 +291,7 @@ public class ConfigReader {
         for(int i = 1; i < data.getArea().getIcons().size(); i++) {
             data.getArea().getIcons().get(i).setShown(false);
         }
-        dataController.revealSurroundingTile(data, data.getPlayer().getIcon().getX(), data.getPlayer().getIcon().getY());
+        dataController.revealSurroundingTile(data, data.getPlayer().getIcon().getX(), data.getPlayer().getIcon().getY(), data.getPlayer().getVision());
         System.out.println("Game Initialized!");
         return data;
   }

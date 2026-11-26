@@ -63,7 +63,7 @@ public class Teleport implements PluginListenerApi {
 
     @Override 
     public void onPlayerMove(GameData data, double newX, double newY) {
-        dataController.revealSurroundingTile(data, newX, newY);
+        dataController.revealSurroundingTile(data, newX, newY, data.getPlayer().getVision());
     }
     @Override public void onItemAcquired(GameData data, String itemName) { /* Not used by this plugin */ }
 }

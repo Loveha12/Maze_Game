@@ -2,6 +2,7 @@ package edu.curtin.saed.gameplugins;
 
 import edu.curtin.saed.api.apiinterfaces.PluginListenerApi;
 import edu.curtin.saed.api.model.GameData;
+import edu.curtin.saed.api.model.GridArea;
 import edu.curtin.saed.api.model.GridAreaIcon;
 
 /*
@@ -19,29 +20,19 @@ public class Reveal implements PluginListenerApi {
 
   @Override
   public void onItemAcquired(GameData data, String itemName) {
-    if (itemName.equals("Map") && running) {
-      for (GridAreaIcon icon : data.getArea().getIcons()) {
-        if (!icon.getCaption().equals("Obstacle")) {
-          icon.setShown(true);
-        }
-      }
-    }
+    /* not used by this plugin */
   }
 
   @Override
   public void onPluginActionSelected(GameData data) {
-    if (!this.running) {
-      this.running = true;
+    for (GridAreaIcon icon : data.getArea().getIcons()) {
+      data.getArea().setSquareColor(icon.getX(), icon.getY(), true);
     }
-    else {
-      this.running = false;
-      System.out.println(pluginName + " shutting down...");
-    }
+    data.getArea().setVisible(true);
   }
 
   @Override
   public String getPluginName() {
     return pluginName;
   }
-
 }

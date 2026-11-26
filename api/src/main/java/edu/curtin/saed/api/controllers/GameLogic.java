@@ -32,7 +32,7 @@ public class GameLogic implements GameLogicApi {
         for (PluginListenerApi listener : data.getListeners()) {
             listener.onPlayerMove(data, newX, newY);
         }
-        dataController.revealSurroundingTile(data, newX, newY);
+        dataController.revealSurroundingTile(data, newX, newY, data.getPlayer().getVision());
     }
 
     private void fireItemAcquired(GameData data, Item item) {
@@ -49,26 +49,27 @@ public class GameLogic implements GameLogicApi {
             System.out.println("Obstacle is impassable");
             return false;
         }
-
+        
         List<Item> playerInventory = player.getInventory();
+        int requiredNumberOfItems = 0;
         // Check if player has all required items
         for (String requiredName : requiredItems) {
-            boolean hasItem = false;
             for (Item inventoryItem : playerInventory) {
                 if (inventoryItem.getItemName().equals(requiredName)) {
-                    hasItem = true;
-                    System.out.println("Player has required items to pass obstacle.");
-                    return true;
+                    requiredNumberOfItems++;
                 }
             }
-            if (!hasItem) {
-                System.out.println("Cannot pass obstacle. Missing required item: " + requiredName);
-                return false;
-            }
         }
-        // If all required items are found
+        if (requiredNumberOfItems == requiredItems.size()) {
+            System.out.println("You were able to pass through the door with the required items");
+            return true;
+        } else {
+            System.out.println("You're missing some required items");
+        }
+        // If all required items are not found
         return false;
     }
+
 
     private boolean checkAndHandleCollision(GameData data, double newX, double newY) {
 
@@ -77,16 +78,16 @@ public class GameLogic implements GameLogicApi {
                 // Check for Obstacle
                 for (Obstacle obstacle : data.getObstacles()) {
                     if (obstacle.getIcon().getX() == newX && obstacle.getIcon().getY() == newY) {
-                        if (!isPassableObstacle(data.getPlayer(), obstacle)) {
-                            return false;
-                        } else {
+                        if (isPassableObstacle(data.getPlayer(), obstacle)) {
+                            data.getArea().getIcons().remove(obstacle.getIcon());
                             return true;
                         }
+                        return false;
                     }
                 }
 
                 // Check for Item
-                Item itemToPickUp = null;
+                Item itemToPickUp;
                 for (Item item : data.getItems()) {
                     if (item.getIcon().getX() == newX && item.getIcon().getY() == newY) {
                         itemToPickUp = item;

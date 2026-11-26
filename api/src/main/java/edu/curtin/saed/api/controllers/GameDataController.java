@@ -76,11 +76,14 @@ public class GameDataController implements GameDataApi {
     }
 
     @Override
-    public void revealSurroundingTile(GameData data, double newX, double newY) {
+    public void revealSurroundingTile(GameData data, double newX, double newY, int vision) {
         this.setSquareVisibility(data, newX, newY, true);
-        this.setSquareVisibility(data, (newX+1), newY, true);
-        this.setSquareVisibility(data, (newX-1), newY, true);
-        this.setSquareVisibility(data, newX, (newY+1), true);
-        this.setSquareVisibility(data, newX, (newY-1), true);
+        for (int i = 1; i <= vision; i++) {
+          this.setSquareVisibility(data, (newX+i), newY, true);
+          this.setSquareVisibility(data, (newX-i), newY, true);
+          this.setSquareVisibility(data, newX, (newY+i), true);
+          this.setSquareVisibility(data, newX, (newY-i), true);
+        }
+        
     }
 }

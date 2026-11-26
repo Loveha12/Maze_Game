@@ -25,6 +25,6 @@ public interface GameDataApi {
   void addSquareContents(List<GridAreaIcon> iconList, double x, double y, GridAreaIcon icon);
   void removeSquareContents(List<GridAreaIcon> iconList, double x, double y, GridAreaIcon icon);
   void setSquareVisibility(GameData data,double x, double y, boolean visible);
-  void revealSurroundingTile(GameData data, double newX, double newY);
+  void revealSurroundingTile(GameData data, double newX, double newY, int vision);
 
 }

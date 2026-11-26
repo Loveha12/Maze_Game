@@ -2,6 +2,7 @@ package edu.curtin.saed.api.apiinterfaces;
 
 import edu.curtin.saed.api.model.GameData;
 import edu.curtin.saed.api.model.Item;
+import edu.curtin.saed.api.model.Obstacle;
 
 /*
  * Api for all game logic functions
