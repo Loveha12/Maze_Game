@@ -1,0 +1,4 @@
+rootProject.name = 'saed2025_assignment1_start_javafx'
+
+include 'api'
+include 'plugins'
